@@ -7,7 +7,7 @@ import {Images } from "./components/Images";
 import { ImageDetails } from "./components/ImageDetails";
 
 const BackgroundContainer = styled.div`
-    border: 1px solid #000;
+
     width: 90%;
     min-height: 800px;
     display: flex;
@@ -18,6 +18,7 @@ const BackgroundContainer = styled.div`
     background-color: white;
     border-radius: 4px;
     padding: 30px;
+    margin-top: 30px;
 `;
 
 export interface IImageData {
@@ -26,17 +27,13 @@ export interface IImageData {
     score: number;
     author: string;
     id: string;
+    upvote_ratio: number;
 }
 
 const App = () => {
     const [shouldShowIndividualImageDetails, setShouldShowInividualImageDetails] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<IImageData | null>(null)
    
-    
-    useEffect(() => {
-        console.log("S", shouldShowIndividualImageDetails)
-
-    },[shouldShowIndividualImageDetails])
     return <BackgroundContainer>
         {!shouldShowIndividualImageDetails && 
         <Images 

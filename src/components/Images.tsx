@@ -7,7 +7,6 @@ import {Loading} from "./Loading";
 
 const ImagesContainer = styled.div`
     width: 100%;
-    border: 2px solid blue;
 `;
 
 const IndividualImage = styled.div`
@@ -17,7 +16,7 @@ const IndividualImage = styled.div`
     flex-direction: column;
     align-items: center;
     padding-top: 30px;
-    `;
+`;
     
     
 const StyledImage = styled.img`
@@ -44,7 +43,6 @@ export const Images = (props: IImagesProps ): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [imageData, setImageData] = useState<IImageData[] | null>(null);
     const [shouldDisplayImageDetails, setShouldDisplayImageDetails] = useState<boolean>(false);
-    console.log({props})
 
     useEffect(() => {
         fetchImages()
@@ -52,31 +50,32 @@ export const Images = (props: IImagesProps ): JSX.Element => {
 
     async function fetchImages() {
         setIsLoading(true)
-        const res = await fetch(requestURL);
-        const json = await res.json();
-
-        const formattedImages: IImageData[] = []
-
-        json.data.children.forEach((child: any) => {
-            const imagePostData = {
-                url: child.data.url,
-                id: child.data.id,
-                title: child.data.title,
-                score: child.data.score,
-                author: child.data.author
-            }
-          formattedImages.push(imagePostData)
-        })
-        setImageData(formattedImages)
-        setIsLoading(false)
+        try {
+            const res = await fetch(requestURL);
+            const json = await res.json();
+            const formattedImages: IImageData[] = []
+            json.data.children.forEach((child: any) => {
+                const imagePostData = {
+                    url: child.data.url,
+                    id: child.data.id,
+                    title: child.data.title,
+                    score: child.data.score,
+                    author: child.data.author,
+                    upvote_ratio: child.data.upvote_ratio
+                }
+            formattedImages.push(imagePostData)
+            })
+            setImageData(formattedImages)
+            setIsLoading(false)
+        } catch(err) {
+            console.warn(err)
+        }
     }
-
     const handleImageClick = (image: IImageData):void => {
         props.setSelectedImage(image)
         setShouldDisplayImageDetails(true)
         props.setShouldShowInividualImageDetails(!props.shouldShowIndividualImageDetails)
     }
-   
     return <ImagesContainer>
        {isLoading && <Loading />}
 
