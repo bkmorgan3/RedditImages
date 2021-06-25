@@ -78,7 +78,15 @@ export const Images = (props: IImagesProps): JSX.Element => {
   return (
     <ImagesContainer>
       {isLoading && <Loading />}
-      {!isLoading && <SearchField imageData={imageData} />}
+      {!isLoading && (
+        <SearchField
+          setSelectedImage={props.setSelectedImage}
+          setShouldShowIndividualImageDetails={
+            props.setShouldShowIndividualImageDetails
+          }
+          imageData={imageData}
+        />
+      )}
 
       {!!imageData &&
         imageData.map((image: IImageData) => {

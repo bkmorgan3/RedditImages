@@ -23,22 +23,30 @@ const SubmitButton = styled.button`
 
 interface SearchFieldProps {
   imageData: IImageData[] | null;
+  setShouldShowIndividualImageDetails: (val: boolean) => void;
+  setSelectedImage: (val: IImageData) => void;
 }
 export const SearchField = (props: SearchFieldProps): JSX.Element => {
   const [searchText, setSearchText] = useState<string>("");
-  const { imageData } = props;
+  const { imageData, setShouldShowIndividualImageDetails, setSelectedImage } =
+    props;
+
   const handleSearch = () => {
-    {
-      !!imageData &&
-        imageData.find((image: IImageData) => {
-          return image.title === searchText;
-        });
-    }
+    !!imageData &&
+      imageData.find((image: IImageData) => {
+        return image.title === searchText && handleMatchingPost(image);
+      });
   };
 
   const handleChange = (event: any) => {
     setSearchText(event.target.value);
   };
+
+  const handleMatchingPost = (post: IImageData) => {
+    setShouldShowIndividualImageDetails(true);
+    setSelectedImage(post);
+  };
+
   return (
     <SearchContainer>
       <InputField placeholder="Search By Title" onChange={handleChange} />
