@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { IImageData } from "../index";
 
 import { Loading } from "./Loading";
+import { SearchField } from "./SearchField";
 
 const ImagesContainer = styled.div`
   width: 100%;
@@ -77,6 +78,7 @@ export const Images = (props: IImagesProps): JSX.Element => {
   return (
     <ImagesContainer>
       {isLoading && <Loading />}
+      {!isLoading && <SearchField imageData={imageData} />}
 
       {!!imageData &&
         imageData.map((image: IImageData) => {

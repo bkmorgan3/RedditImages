@@ -20,9 +20,7 @@ const BackgroundContainer = styled.div`
   margin-top: 30px;
 `;
 
-const MainHeader = styled.h1`
-
-`;
+const MainHeader = styled.h1``;
 
 export interface IImageData {
   url: string;
@@ -34,14 +32,18 @@ export interface IImageData {
 }
 
 export const App = () => {
-  const [shouldShowIndividualImageDetails, setShouldShowIndividualImageDetails] =
-    useState<boolean>(false);
+  const [
+    shouldShowIndividualImageDetails,
+    setShouldShowIndividualImageDetails,
+  ] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<IImageData | null>(null);
 
   return (
     <BackgroundContainer>
-        <MainHeader>Reddit Image{!shouldShowIndividualImageDetails && "s"}</MainHeader>
-      {!shouldShowIndividualImageDetails && (
+      <MainHeader>
+        Reddit Image{!shouldShowIndividualImageDetails && "s"}
+      </MainHeader>
+      {!shouldShowIndividualImageDetails ? (
         <Images
           setShouldShowIndividualImageDetails={
             setShouldShowIndividualImageDetails
@@ -49,8 +51,7 @@ export const App = () => {
           shouldShowIndividualImageDetails={shouldShowIndividualImageDetails}
           setSelectedImage={setSelectedImage}
         />
-      )}
-      {shouldShowIndividualImageDetails && (
+      ) : (
         <ImageDetails
           setShouldShowIndividualImageDetails={
             setShouldShowIndividualImageDetails

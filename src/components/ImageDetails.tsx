@@ -68,13 +68,13 @@ const ReturnButton = styled.button`
   color: #fff;
   border: none;
   border-radius: 4px;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.5);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.5);
 `;
 
 interface IImageDetailsProps {
   setShouldShowIndividualImageDetails: (val: boolean) => void;
   selectedImage: IImageData | null;
-  shouldShowIndividualImageDetails: boolean
+  shouldShowIndividualImageDetails: boolean;
 }
 export const ImageDetails = (props: IImageDetailsProps): JSX.Element => {
   const { selectedImage } = props;
@@ -101,7 +101,9 @@ export const ImageDetails = (props: IImageDetailsProps): JSX.Element => {
         </IndividualImageDetailsContainer>
         <ReturnButton
           onClick={() =>
-            props.setShouldShowIndividualImageDetails(!props.shouldShowIndividualImageDetails)
+            props.setShouldShowIndividualImageDetails(
+              !props.shouldShowIndividualImageDetails
+            )
           }
         >
           Return
